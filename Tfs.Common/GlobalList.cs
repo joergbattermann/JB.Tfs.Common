@@ -1,4 +1,10 @@
-﻿using System;
+﻿// <copyright file="GlobalList.cs" company="Joerg Battermann">
+//     (c) 2012 Joerg Battermann.
+//     License: Microsoft Public License (Ms-PL). For details see https://github.com/jbattermann/Tfs.Common/blob/master/LICENSE
+// </copyright>
+// <author>Joerg Battermann</author>
+
+using System;
 using System.Collections.Generic;
 using System.Xml;
 

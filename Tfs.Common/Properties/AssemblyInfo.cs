@@ -1,5 +1,10 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿// <copyright file="AssemblyInfo.cs" company="Joerg Battermann">
+//     (c) 2012 Joerg Battermann.
+//     License: Microsoft Public License (Ms-PL). For details see https://github.com/jbattermann/Tfs.Common/blob/master/LICENSE
+// </copyright>
+// <author>Joerg Battermann</author>
+
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -8,7 +13,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Tfs.Common")]
 [assembly: AssemblyDescription("Common Microsoft Team Foundation Server (TM) related functionality")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("joergbattermann.com")]
+[assembly: AssemblyCompany("Jörg Battermann")]
 [assembly: AssemblyProduct("Tfs.Common")]
 [assembly: AssemblyCopyright("Copyright © 2012 Jörg Battermann")]
 [assembly: AssemblyTrademark("")]
@@ -32,5 +37,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.0.0.0")]
+[assembly: AssemblyFileVersion("0.0.0.1")]
