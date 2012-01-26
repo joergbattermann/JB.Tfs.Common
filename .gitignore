@@ -1,6 +1,5 @@
 Thumbs.db
 *.obj
-*.exe
 *.pdb
 *.user
 *.aps
@@ -33,5 +32,6 @@ _ReSharper*/
 **/StyleCop.Cache
 StyleCop.Cache
 #NuGet
+Binaries/
 packages/
 !/packages/*/lib/*.dll

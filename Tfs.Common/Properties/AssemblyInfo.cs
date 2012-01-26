@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Tfs.Common")]
-[assembly: AssemblyDescription("Common Microsoft Team Foundation Server (TM) related functionality")]
+[assembly: AssemblyDescription("A helper library that extends upon the Microsoft Team Foundation Server API")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jörg Battermann")]
 [assembly: AssemblyProduct("Tfs.Common")]
