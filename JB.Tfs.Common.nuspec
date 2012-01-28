@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package>
 <metadata>
- <id>Tfs.Common</id>
- <version>0.0.0.1</version>
- <title>Tfs.Common - TFS Api Extensions, Wrappers and Helpers</title>
+ <id>JB.Tfs.Common</id>
+ <version>0.0.0.2</version>
+ <title>JB.Tfs.Common - TFS Api Extensions, Wrappers and Helpers</title>
  <authors>Joerg Battermann</authors>
  <owners>Joerg Battermann</owners>
- <summary>A helper library that extends upon the Microsoft Team Foundation Server API.</summary>
- <description>A helper library that extends upon the Microsoft Team Foundation Server API.</description>
+ <summary>A helper library that provides extensions, helper methods and new functionality upon the Microsoft Team Foundation Server API.</summary>
+ <description>A helper library that provides extensions, helper methods and new functionality upon the Microsoft Team Foundation Server API.</description>
  <language>en-US</language>
- <licenseUrl>https://github.com/jbattermann/Tfs.Common/blob/master/LICENSE</licenseUrl>
- <projectUrl>https://github.com/jbattermann/Tfs.Common</projectUrl>
+ <licenseUrl>https://github.com/jbattermann/JB.Tfs.Common/blob/master/LICENSE</licenseUrl>
+ <projectUrl>https://github.com/jbattermann/JB.Tfs.Common</projectUrl>
  <dependencies>
   <dependency id="Nito.AsyncEx" />
  </dependencies>
  <tags>tfs teamfoundationserver teamfoundationservices visualstudio vs2010 net40</tags>
  <references>
-  <reference file="Tfs.Common.dll" />
+  <reference file="JB.Tfs.Common.dll" />
  </references>
  <releaseNotes>
+   [0.0.0.2] Moved namespace.
    [0.0.0.1] Initial functionality, particularly GlobalLists.
  </releaseNotes>
 </metadata>
 <files>
- <file src="Tfs.Common\bin\Release\Tfs.Common.dll" target="lib\net40" />
- <file src="Tfs.Common\bin\Release\Tfs.Common.pdb" target="lib\net40" />
- <file src="Tfs.Common\bin\Release\Tfs.Common.xml" target="lib\net40" />
+ <file src="JB.Tfs.Common\bin\Release\JB.Tfs.Common.dll" target="lib\net40" />
+ <file src="JB.Tfs.Common\bin\Release\JB.Tfs.Common.pdb" target="lib\net40" />
+ <file src="JB.Tfs.Common\bin\Release\JB.Tfs.Common.xml" target="lib\net40" />
 </files>
 </package>
