@@ -1,4 +1,4 @@
-Tfs.Common - TFS Api Extensions, Wrappers and Helpers
+JB.Tfs.Common - TFS Api Extensions, Wrappers and Helpers
 
 A helper library that extends upon the Microsoft Team Foundation Server API.
-Binaries are published via and at NuGet(.org): https://nuget.org/packages/Tfs.Common
+Binaries are published via and at NuGet(.org): https://nuget.org/packages/JB.Tfs.Common

@@ -8,8 +8,8 @@
     <ProjectGuid>{54520C8F-0F00-410A-B282-8A9FBA4F83B1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tfs.Common</RootNamespace>
-    <AssemblyName>Tfs.Common</AssemblyName>
+    <RootNamespace>JB.Tfs.Common</RootNamespace>
+    <AssemblyName>JB.Tfs.Common</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -29,7 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Tfs.Common.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\JB.Tfs.Common.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Nito.AsyncEx">

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tfs.Common", "Tfs.Common\Tfs.Common.csproj", "{54520C8F-0F00-410A-B282-8A9FBA4F83B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JB.Tfs.Common", "JB.Tfs.Common\JB.Tfs.Common.csproj", "{54520C8F-0F00-410A-B282-8A9FBA4F83B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

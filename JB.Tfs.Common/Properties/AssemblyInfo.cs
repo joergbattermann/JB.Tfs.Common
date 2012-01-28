@@ -1,6 +1,6 @@
 ﻿// <copyright file="AssemblyInfo.cs" company="Joerg Battermann">
 //     (c) 2012 Joerg Battermann.
-//     License: Microsoft Public License (Ms-PL). For details see https://github.com/jbattermann/Tfs.Common/blob/master/LICENSE
+//     License: Microsoft Public License (Ms-PL). For details see https://github.com/jbattermann/JB.Tfs.Common/blob/master/LICENSE
 // </copyright>
 // <author>Joerg Battermann</author>
 
@@ -10,11 +10,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Tfs.Common")]
+[assembly: AssemblyTitle("JB.Tfs.Common")]
 [assembly: AssemblyDescription("A helper library that extends upon the Microsoft Team Foundation Server API")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jörg Battermann")]
-[assembly: AssemblyProduct("Tfs.Common")]
+[assembly: AssemblyProduct("JB.Tfs.Common")]
 [assembly: AssemblyCopyright("Copyright © 2012 Jörg Battermann")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

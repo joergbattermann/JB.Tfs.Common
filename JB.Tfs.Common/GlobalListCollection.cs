@@ -1,6 +1,6 @@
 ﻿// <copyright file="GlobalListCollection.cs" company="Joerg Battermann">
 //     (c) 2012 Joerg Battermann.
-//     License: Microsoft Public License (Ms-PL). For details see https://github.com/jbattermann/Tfs.Common/blob/master/LICENSE
+//     License: Microsoft Public License (Ms-PL). For details see https://github.com/jbattermann/JB.Tfs.Common/blob/master/LICENSE
 // </copyright>
 // <author>Joerg Battermann</author>
 
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Xml;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 
-namespace Tfs.Common
+namespace JB.Tfs.Common
 {
     public class GlobalListCollection : IList<GlobalList>
     {
