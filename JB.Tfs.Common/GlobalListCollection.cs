@@ -16,7 +16,6 @@ namespace JB.Tfs.Common
     public class GlobalListCollection : IList<GlobalList>
     {
         private readonly List<GlobalList> _globalListCollection = new List<GlobalList>();
-        private XmlDocument _xmlDocument;
 
         private const string ProcessingInstructionData = "version='1.0' encoding='utf-8'";
         private const string ProcessingInstructionTarget = "xml";
@@ -42,9 +41,11 @@ namespace JB.Tfs.Common
         private void FetchDataFromTeamFoundationServer(WorkItemStore workItemStore)
         {
             if (workItemStore == null) throw new ArgumentNullException("workItemStore");
-            _xmlDocument = GetOrCreateGlobalListsXmlDocument(workItemStore);
 
-            foreach (var globalListXmlElement in GetGlobalListXmlElements(_xmlDocument))
+            // remove previously fetched entries
+            _globalListCollection.Clear();
+
+            foreach (var globalListXmlElement in GetGlobalListXmlElements(GetOrCreateGlobalListsXmlDocument(workItemStore)))
             {
                 _globalListCollection.Add(new GlobalList(globalListXmlElement));
             }
@@ -61,7 +62,6 @@ namespace JB.Tfs.Common
 
             if (globalListsElement == null)
                 throw new XmlException("GlobalList contains no proper root element.");
-
             return (from XmlNode element in globalListsElement.ChildNodes
                     where element.LocalName == GlobalListIdentifier
                     select element as XmlElement);
