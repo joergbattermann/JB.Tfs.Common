@@ -51,6 +51,7 @@
     <Compile Include="GlobalList.cs" />
     <Compile Include="GlobalListCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryExtensions.cs" />
     <Compile Include="WorkItemStoreExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
