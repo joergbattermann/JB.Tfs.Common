@@ -20,7 +20,9 @@ namespace JB.Tfs.Common
     {
         private readonly ConcurrentDictionary<WorkItemStore, bool> _workItemStores;
         private readonly TfsTeamProjectCollection _tfsTeamProjectCollection;
-        private static readonly object LockerObject = new object();
+        private static readonly object PoolLockerObject = new object();
+        private static readonly object InstanceLockerObject = new object();
+        private static WorkItemStoreConnectionPool _instance;
         private volatile bool _disposing;
 
         /// <summary>
@@ -35,7 +37,7 @@ namespace JB.Tfs.Common
             if (amountOfPooledConnections < 1)
                 throw new ArgumentOutOfRangeException("amountOfPooledConnections", "The minimum amount of concurrent connections must be 1 or higher");
 
-            lock (LockerObject)
+            lock (PoolLockerObject)
             {
                 _tfsTeamProjectCollection = tfsTeamProjectCollection;
                 _workItemStores = new ConcurrentDictionary<WorkItemStore, bool>();
@@ -45,8 +47,22 @@ namespace JB.Tfs.Common
                     _workItemStores.TryAdd(new WorkItemStore(tfsTeamProjectCollection), false);
                 }
 
-                Instance = this;                
+                lock (InstanceLockerObject)
+                {
+                    _instance = this;                    
+                }
             }
+        }
+
+        /// <summary>
+        /// Determines whether this instance is disposing.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if this instance is disposing; otherwise, <c>false</c>.
+        /// </returns>
+        internal bool IsDisposing()
+        {
+            return _disposing;
         }
 
         /// <summary>
@@ -58,7 +74,7 @@ namespace JB.Tfs.Common
             if (increaseBy < 1)
                 throw new ArgumentOutOfRangeException("increaseBy", "The minimum amount of new concurrent connections must be 1 or higher");
 
-            lock (LockerObject)
+            lock (PoolLockerObject)
             {
                 _workItemStores.TryAdd(new WorkItemStore(_tfsTeamProjectCollection), false);
             }
@@ -73,7 +89,7 @@ namespace JB.Tfs.Common
             if (decreaseBy < 1)
                 throw new ArgumentOutOfRangeException("decreaseBy", "The minimum amount of new concurrent connections must be 1 or higher");
 
-            lock (LockerObject)
+            lock (PoolLockerObject)
             {
                 if (_workItemStores.Count - decreaseBy < 1)
                     throw new ArgumentOutOfRangeException("decreaseBy", "The amount of concurrent connections would be less than 1 after reduction.");
@@ -95,20 +111,29 @@ namespace JB.Tfs.Common
         /// <summary>
         /// Gets the singleton instance.
         /// </summary>
-        public static WorkItemStoreConnectionPool Instance { get; private set; }
+        public static WorkItemStoreConnectionPool Instance
+        {
+            get
+            {
+                lock (InstanceLockerObject)
+                {
+                    return _instance;
+                }
+            }
+        }
 
         /// <summary>
         /// Tries to get and reserve a pooled <see cref="T:Microsoft.TeamFoundation.WorkItemTracking.Client.WorkItemStore"/>.
         /// </summary>
         /// <returns></returns>
-        public WorkItemStore TryGetWorkItemStore()
+        public PooledWorkItemStore TryGetWorkItemStore()
         {
-            lock (LockerObject)
+            lock (PoolLockerObject)
             {
                 foreach (var workItemStore in _workItemStores.Where(workItemStore => workItemStore.Value != true))
                 {
                     _workItemStores.TryUpdate(workItemStore.Key, true, false);
-                    return workItemStore.Key;
+                    return new PooledWorkItemStore(workItemStore.Key);
                 }
 
                 return null;
@@ -124,7 +149,7 @@ namespace JB.Tfs.Common
         {
             if (workItemStore == null) throw new ArgumentNullException("workItemStore");
 
-            lock (LockerObject)
+            lock (PoolLockerObject)
             {
                 return _workItemStores.ContainsKey(workItemStore) &&
                        _workItemStores.TryUpdate(workItemStore, false, true);
@@ -139,7 +164,7 @@ namespace JB.Tfs.Common
         /// <filterpriority>2</filterpriority>
         public void Dispose()
         {
-            Dispose(1000);
+            Dispose(500);
         }
 
         /// <summary>
@@ -156,6 +181,7 @@ namespace JB.Tfs.Common
             SpinWait.SpinUntil(() => _workItemStores.All(store => store.Value == false), timeToWaitForReservedWorkItemStores);
 
             _workItemStores.Clear();
+            _instance = null;
         }
 
         #endregion

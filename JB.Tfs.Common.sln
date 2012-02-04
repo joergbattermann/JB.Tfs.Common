@@ -6,6 +6,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5E4032EB-084A-4F3F-9257-3DB1631B0541}"
 	ProjectSection(SolutionItems) = preProject
 		JB.Tfs.Common.nuspec = JB.Tfs.Common.nuspec
+		README = README
 	EndProjectSection
 EndProject
 Global

@@ -27,6 +27,17 @@ namespace JB.Tfs.Common
         }
 
         /// <summary>
+        /// Determines whether this instance is disposing.
+        /// </summary>
+        /// <returns>
+        ///   <c>true</c> if this instance is disposing; otherwise, <c>false</c>.
+        /// </returns>
+        internal bool IsDisposing()
+        {
+            return _disposing;
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="PooledWorkItemStore"/> class.
         /// </summary>
         /// <param name="workItemStore">The work item store.</param>
@@ -34,6 +45,15 @@ namespace JB.Tfs.Common
         {
             if (workItemStore == null) throw new ArgumentNullException("workItemStore");
             _workItemStore = workItemStore;
+        }
+
+        /// <summary>
+        /// Releases unmanaged resources and performs other cleanup operations before the
+        /// <see cref="PooledWorkItemStore"/> is reclaimed by garbage collection.
+        /// </summary>
+        ~PooledWorkItemStore()
+        {
+            Dispose();
         }
 
         #region Implementation of IDisposable
@@ -46,7 +66,8 @@ namespace JB.Tfs.Common
         {
             if (_disposing)
                 return;
-
+            
+            GC.SuppressFinalize(this);
             _disposing = true;
 
             if (_workItemStore == null)
@@ -55,6 +76,9 @@ namespace JB.Tfs.Common
             var released = false;
             while (released == false)
             {
+                if (WorkItemStoreConnectionPool.Instance == null || WorkItemStoreConnectionPool.Instance.IsDisposing())
+                    break;
+                
                 released = WorkItemStoreConnectionPool.Instance.TryRelease(_workItemStore);
             }
             

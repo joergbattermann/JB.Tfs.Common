@@ -28,7 +28,7 @@ namespace JB.Tfs.Common
         /// <summary>
         /// Initializes a new instance of the <see cref="GlobalListCollection"/> class.
         /// </summary>
-        /// <param name="workItemStore">The work item store.</param>
+        /// <param name="workItemStore">The WorkItemStore to query.</param>
         public GlobalListCollection(WorkItemStore workItemStore)
         {
             if (workItemStore == null) throw new ArgumentNullException("workItemStore");
