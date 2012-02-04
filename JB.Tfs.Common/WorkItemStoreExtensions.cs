@@ -33,7 +33,7 @@ namespace JB.Tfs.Common
         /// <summary>
         /// Gets the global list values.
         /// </summary>
-        /// <param name="workItemStore">The work item store.</param>
+        /// <param name="workItemStore">The WorkItemStore to query.</param>
         /// <param name="globalListName">Name of the global list.</param>
         /// <returns></returns>
         public static IEnumerable<string> GetGlobalListValues(this WorkItemStore workItemStore, string globalListName)
@@ -55,8 +55,8 @@ namespace JB.Tfs.Common
         /// <summary>
         /// Performs the Query asynchronously.
         /// </summary>
-        /// <param name="workItemStore">The work item store.</param>
-        /// <param name="wiql">The wiql query.</param>
+        /// <param name="workItemStore">The WorkItemStore to query.</param>
+        /// <param name="wiql">The query to execute.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         public static Task<WorkItemCollection> QueryAsync(this WorkItemStore workItemStore, string wiql, CancellationToken cancellationToken = new CancellationToken())
@@ -68,9 +68,9 @@ namespace JB.Tfs.Common
         /// <summary>
         /// Performs the Query asynchronously.
         /// </summary>
-        /// <param name="workItemStore">The work item store.</param>
-        /// <param name="wiql">The wiql.</param>
-        /// <param name="batchReadParameters">The batch read parameters.</param>
+        /// <param name="workItemStore">The WorkItemStore to query.</param>
+        /// <param name="wiql">The query string to execute.</param>
+        /// <param name="batchReadParameters">A collection of WorkItem ID and revision pairs.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         public static Task<WorkItemCollection> QueryAsync(this WorkItemStore workItemStore, string wiql, BatchReadParameterCollection batchReadParameters, CancellationToken cancellationToken = new CancellationToken())
@@ -82,9 +82,9 @@ namespace JB.Tfs.Common
         /// <summary>
         /// Performs the Query asynchronously.
         /// </summary>
-        /// <param name="workItemStore">The work item store.</param>
-        /// <param name="wiql">The wiql.</param>
-        /// <param name="ids">The ids.</param>
+        /// <param name="workItemStore">The WorkItemStore to query.</param>
+        /// <param name="wiql">The query string to execute.</param>
+        /// <param name="ids">An array of WorkItem IDs.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         public static Task<WorkItemCollection> QueryAsync(this WorkItemStore workItemStore, string wiql, int[] ids, CancellationToken cancellationToken = new CancellationToken())
@@ -96,10 +96,10 @@ namespace JB.Tfs.Common
         /// <summary>
         /// Performs the Query asynchronously.
         /// </summary>
-        /// <param name="workItemStore">The work item store.</param>
-        /// <param name="wiql">The wiql.</param>
-        /// <param name="ids">The ids.</param>
-        /// <param name="revs">The revs.</param>
+        /// <param name="workItemStore">The WorkItemStore to query.</param>
+        /// <param name="wiql">The query string to execute.</param>
+        /// <param name="ids">An array of WorkItem IDs.</param>
+        /// <param name="revs">An array of WorkItem revisions.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         public static Task<WorkItemCollection> QueryAsync(this WorkItemStore workItemStore, string wiql, int[] ids, int[] revs, CancellationToken cancellationToken = new CancellationToken())
@@ -111,9 +111,9 @@ namespace JB.Tfs.Common
         /// <summary>
         /// Performs the Query asynchronously.
         /// </summary>
-        /// <param name="workItemStore">The work item store.</param>
-        /// <param name="wiql">The wiql.</param>
-        /// <param name="context">The context.</param>
+        /// <param name="workItemStore">The WorkItemStore to query.</param>
+        /// <param name="wiql">The query to execute.</param>
+        /// <param name="context">A dictionary of macros and values.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         public static Task<WorkItemCollection> QueryAsync(this WorkItemStore workItemStore, string wiql, IDictionary context, CancellationToken cancellationToken = new CancellationToken())
@@ -125,10 +125,10 @@ namespace JB.Tfs.Common
         /// <summary>
         /// Performs the Query asynchronously.
         /// </summary>
-        /// <param name="workItemStore">The work item store.</param>
-        /// <param name="wiql">The wiql.</param>
-        /// <param name="context">The context.</param>
-        /// <param name="dayPrevision">if set to <c>true</c> [day prevision].</param>
+        /// <param name="workItemStore">The WorkItemStore to query.</param>
+        /// <param name="wiql">The query to execute.</param>
+        /// <param name="context">A dictionary of macros and values.</param>
+        /// <param name="dayPrevision">True to ignore time values so that DateTime objects are treated as dates; otherwise, false.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         public static Task<WorkItemCollection> QueryAsync(this WorkItemStore workItemStore, string wiql, IDictionary context, bool dayPrevision, CancellationToken cancellationToken = new CancellationToken())
@@ -140,8 +140,8 @@ namespace JB.Tfs.Common
         /// <summary>
         /// Performs the Count Query asynchronously.
         /// </summary>
-        /// <param name="workItemStore">The work item store.</param>
-        /// <param name="wiql">The wiql.</param>
+        /// <param name="workItemStore">The WorkItemStore to query.</param>
+        /// <param name="wiql">The query to execute.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         public static Task<int> QueryCountAsync(this WorkItemStore workItemStore, string wiql, CancellationToken cancellationToken = new CancellationToken())
@@ -153,8 +153,8 @@ namespace JB.Tfs.Common
         /// <summary>
         /// Performs the Count Query asynchronously.
         /// </summary>
-        /// <param name="workItemStore">The work item store.</param>
-        /// <param name="wiql">The wiql.</param>
+        /// <param name="workItemStore">The WorkItemStore to query.</param>
+        /// <param name="wiql">The query to execute.</param>
         /// <param name="context">The context.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>

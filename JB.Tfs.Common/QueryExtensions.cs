@@ -13,7 +13,7 @@ namespace JB.Tfs.Common
         /// <summary>
         /// Runs the query asynchronously.
         /// </summary>
-        /// <param name="query">The query.</param>
+        /// <param name="query">The <see cref="T:Microsoft.TeamFoundation.WorkItemTracking.Client.Query"/> to execute.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         public static Task<WorkItemCollection> RunQueryAsync(this Query query, CancellationToken cancellationToken = new CancellationToken())
@@ -25,7 +25,7 @@ namespace JB.Tfs.Common
         /// <summary>
         /// Runs the count query asynchronously.
         /// </summary>
-        /// <param name="query">The query.</param>
+        /// <param name="query">The <see cref="T:Microsoft.TeamFoundation.WorkItemTracking.Client.Query"/> to execute.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         public static Task<int> RunQueryCountAsync(this Query query, CancellationToken cancellationToken = new CancellationToken())
@@ -37,7 +37,7 @@ namespace JB.Tfs.Common
         /// <summary>
         /// Runs the link query asynchronously.
         /// </summary>
-        /// <param name="query">The query.</param>
+        /// <param name="query">The <see cref="T:Microsoft.TeamFoundation.WorkItemTracking.Client.Query"/> to execute.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns></returns>
         public static Task<WorkItemLinkInfo[]> RunLinkQueryAsync(this Query query, CancellationToken cancellationToken = new CancellationToken())
