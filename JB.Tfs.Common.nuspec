@@ -2,7 +2,7 @@
 <package>
 <metadata>
  <id>JB.Tfs.Common</id>
- <version>0.0.0.3</version>
+ <version>0.0.0.4</version>
  <title>JB.Tfs.Common - TFS Api Extensions, Wrappers and Helpers</title>
  <authors>Joerg Battermann</authors>
  <owners>Joerg Battermann</owners>
@@ -19,6 +19,7 @@
   <reference file="JB.Tfs.Common.dll" />
  </references>
  <releaseNotes>
+   [0.0.0.4] Added Task/TPL based Query alternatives for all WorkItemStore.Query(..)/.QueryCount(...) methods aswell as Query(..).RunQueryAsync()/RunQueryCountAsync() &amp; .RunLinkQueryAsync() methods.
    [0.0.0.3] Fixed Refresh() Bug.
    [0.0.0.2] Moved namespace.
    [0.0.0.1] Initial functionality, particularly GlobalLists.
