@@ -41,6 +41,17 @@ namespace JB.Tfs.Common
             return taskCompletionSource.Task;
         }
 
+        public static Task<TResult> FromAsync(Func<AsyncCallback, ICancelableAsyncResult> beginMethod,
+            Func<ICancelableAsyncResult, TResult> endMethod,
+            CancellationToken cancellationToken,
+            TaskCreationOptions creationOptions,
+            TaskScheduler scheduler)
+        {
+            var task = FromAsync(beginMethod, endMethod, cancellationToken, creationOptions);
+            task.Start(scheduler);
+            return task;
+        }
+
         public static Task<TResult> FromAsync<TArg1>(Func<TArg1, AsyncCallback, ICancelableAsyncResult> beginMethod,
             Func<ICancelableAsyncResult, TResult> endMethod,
             TArg1 arg1,
@@ -65,6 +76,18 @@ namespace JB.Tfs.Common
 
             // Return the manually-controlled task.
             return taskCompletionSource.Task;
+        }
+
+        public static Task<TResult> FromAsync<TArg1>(Func<TArg1, AsyncCallback, ICancelableAsyncResult> beginMethod,
+            Func<ICancelableAsyncResult, TResult> endMethod,
+            TArg1 arg1,
+            CancellationToken cancellationToken,
+            TaskCreationOptions creationOptions,
+            TaskScheduler scheduler)
+        {
+            var task = FromAsync(beginMethod, endMethod, arg1, cancellationToken, creationOptions);
+            task.Start(scheduler);
+            return task;
         }
 
         public static Task<TResult> FromAsync<TArg1, TArg2>(Func<TArg1, TArg2, AsyncCallback, ICancelableAsyncResult> beginMethod,
@@ -94,6 +117,19 @@ namespace JB.Tfs.Common
             return taskCompletionSource.Task;
         }
 
+        public static Task<TResult> FromAsync<TArg1, TArg2>(Func<TArg1, TArg2, AsyncCallback, ICancelableAsyncResult> beginMethod,
+            Func<ICancelableAsyncResult, TResult> endMethod,
+            TArg1 arg1,
+            TArg2 arg2,
+            CancellationToken cancellationToken,
+            TaskCreationOptions creationOptions,
+            TaskScheduler scheduler)
+        {
+            var task = FromAsync(beginMethod, endMethod, arg1, arg2, cancellationToken, creationOptions);
+            task.Start(scheduler);
+            return task;
+        }
+
         public static Task<TResult> FromAsync<TArg1, TArg2, TArg3>(Func<TArg1, TArg2, TArg3, AsyncCallback, ICancelableAsyncResult> beginMethod,
             Func<ICancelableAsyncResult, TResult> endMethod,
             TArg1 arg1,
@@ -121,6 +157,20 @@ namespace JB.Tfs.Common
             // Return the manually-controlled task.
             return taskCompletionSource.Task;
         }
+
+        public static Task<TResult> FromAsync<TArg1, TArg2, TArg3>(Func<TArg1, TArg2, TArg3, AsyncCallback, ICancelableAsyncResult> beginMethod,
+            Func<ICancelableAsyncResult, TResult> endMethod,
+            TArg1 arg1,
+            TArg2 arg2,
+            TArg3 arg3,
+            CancellationToken cancellationToken,
+            TaskCreationOptions creationOptions,
+            TaskScheduler scheduler)
+        {
+            var task = FromAsync(beginMethod, endMethod, arg1, arg2, arg3, cancellationToken, creationOptions);
+            task.Start(scheduler);
+            return task;
+        }
         #endregion
 
         #region overrides
@@ -135,6 +185,25 @@ namespace JB.Tfs.Common
             CancellationToken cancellationToken)
         {
             return FromAsync(beginMethod, endMethod, cancellationToken, TaskCreationOptions.None);
+        }
+
+        public static Task<TResult> FromAsync(Func<AsyncCallback, ICancelableAsyncResult> beginMethod,
+            Func<ICancelableAsyncResult, TResult> endMethod,
+            TaskScheduler scheduler)
+        {
+            var task = FromAsync(beginMethod, endMethod);
+            task.Start(scheduler);
+            return task;
+        }
+
+        public static Task<TResult> FromAsync(Func<AsyncCallback, ICancelableAsyncResult> beginMethod,
+            Func<ICancelableAsyncResult, TResult> endMethod,
+            CancellationToken cancellationToken,
+            TaskScheduler scheduler)
+        {
+            var task = FromAsync(beginMethod, endMethod, cancellationToken);
+            task.Start(scheduler);
+            return task;
         }
 
         public static Task<TResult> FromAsync<TArg1, TArg2, TArg3>(Func<TArg1, TArg2, TArg3, AsyncCallback, ICancelableAsyncResult> beginMethod,
@@ -156,6 +225,31 @@ namespace JB.Tfs.Common
             return FromAsync(beginMethod, endMethod, arg1, arg2, arg3, cancellationToken, TaskCreationOptions.None);
         }
 
+        public static Task<TResult> FromAsync<TArg1, TArg2, TArg3>(Func<TArg1, TArg2, TArg3, AsyncCallback, ICancelableAsyncResult> beginMethod,
+            Func<ICancelableAsyncResult, TResult> endMethod,
+            TArg1 arg1,
+            TArg2 arg2,
+            TArg3 arg3,
+            TaskScheduler scheduler)
+        {
+            var task = FromAsync(beginMethod, endMethod, arg1, arg2, arg3);
+            task.Start(scheduler);
+            return task;
+        }
+
+        public static Task<TResult> FromAsync<TArg1, TArg2, TArg3>(Func<TArg1, TArg2, TArg3, AsyncCallback, ICancelableAsyncResult> beginMethod,
+            Func<ICancelableAsyncResult, TResult> endMethod,
+            TArg1 arg1,
+            TArg2 arg2,
+            TArg3 arg3,
+            CancellationToken cancellationToken,
+            TaskScheduler scheduler)
+        {
+            var task = FromAsync(beginMethod, endMethod, arg1, arg2, arg3, cancellationToken);
+            task.Start(scheduler);
+            return task;
+        }
+
         public static Task<TResult> FromAsync<TArg1, TArg2>(Func<TArg1, TArg2, AsyncCallback, ICancelableAsyncResult> beginMethod,
             Func<ICancelableAsyncResult, TResult> endMethod,
             TArg1 arg1,
@@ -173,6 +267,29 @@ namespace JB.Tfs.Common
             return FromAsync(beginMethod, endMethod, arg1, arg2, cancellationToken, TaskCreationOptions.None);
         }
 
+        public static Task<TResult> FromAsync<TArg1, TArg2>(Func<TArg1, TArg2, AsyncCallback, ICancelableAsyncResult> beginMethod,
+            Func<ICancelableAsyncResult, TResult> endMethod,
+            TArg1 arg1,
+            TArg2 arg2,
+            TaskScheduler scheduler)
+        {
+            var task = FromAsync(beginMethod, endMethod, arg1, arg2);
+            task.Start(scheduler);
+            return task;
+        }
+
+        public static Task<TResult> FromAsync<TArg1, TArg2>(Func<TArg1, TArg2, AsyncCallback, ICancelableAsyncResult> beginMethod,
+            Func<ICancelableAsyncResult, TResult> endMethod,
+            TArg1 arg1,
+            TArg2 arg2,
+            CancellationToken cancellationToken,
+            TaskScheduler scheduler)
+        {
+            var task = FromAsync(beginMethod, endMethod, arg1, arg2, cancellationToken);
+            task.Start(scheduler);
+            return task;
+        }
+
         public static Task<TResult> FromAsync<TArg1>(Func<TArg1, AsyncCallback, ICancelableAsyncResult> beginMethod,
             Func<ICancelableAsyncResult, TResult> endMethod,
             TArg1 arg1)
@@ -186,6 +303,27 @@ namespace JB.Tfs.Common
             CancellationToken cancellationToken)
         {
             return FromAsync(beginMethod, endMethod, arg1, cancellationToken, TaskCreationOptions.None);
+        }
+
+        public static Task<TResult> FromAsync<TArg1>(Func<TArg1, AsyncCallback, ICancelableAsyncResult> beginMethod,
+            Func<ICancelableAsyncResult, TResult> endMethod,
+            TArg1 arg1,
+            TaskScheduler scheduler)
+        {
+            var task = FromAsync(beginMethod, endMethod, arg1);
+            task.Start(scheduler);
+            return task;
+        }
+
+        public static Task<TResult> FromAsync<TArg1>(Func<TArg1, AsyncCallback, ICancelableAsyncResult> beginMethod,
+            Func<ICancelableAsyncResult, TResult> endMethod,
+            TArg1 arg1,
+            CancellationToken cancellationToken,
+            TaskScheduler scheduler)
+        {
+            var task = FromAsync(beginMethod, endMethod, arg1, cancellationToken);
+            task.Start(scheduler);
+            return task;
         }
         #endregion
 
