@@ -1,4 +1,11 @@
-﻿using System;
+﻿// <copyright file="TfsTaskFactory.cs" company="Joerg Battermann">
+//     (c) 2012 Joerg Battermann.
+//     License: Microsoft Public License (Ms-PL). For details see https://github.com/jbattermann/JB.Tfs.Common/blob/master/LICENSE
+//     Based on: http://stackoverflow.com/questions/7518139/how-can-i-use-the-asyncctp-with-an-tfs-apm-method-query-begin-endquery
+// </copyright>
+// <author>Joerg Battermann</author>
+
+using System;
 
 namespace JB.Tfs.Common
 {
