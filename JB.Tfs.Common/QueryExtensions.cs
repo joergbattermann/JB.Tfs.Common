@@ -25,7 +25,7 @@ namespace JB.Tfs.Common
         public static Task<WorkItemCollection> RunQueryAsync(this Query query, CancellationToken cancellationToken = new CancellationToken())
         {
             if (query == null) throw new ArgumentNullException("query");
-            return Nito.AsyncEx.TeamFoundationClientAsyncFactory<WorkItemCollection>.FromApm(query.BeginQuery, query.EndQuery, cancellationToken);
+            return TfsTaskFactory<WorkItemCollection>.FromAsync(query.BeginQuery, query.EndQuery, cancellationToken);
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace JB.Tfs.Common
         public static Task<int> RunQueryCountAsync(this Query query, CancellationToken cancellationToken = new CancellationToken())
         {
             if (query == null) throw new ArgumentNullException("query");
-            return Nito.AsyncEx.TeamFoundationClientAsyncFactory<int>.FromApm(query.BeginCountOnlyQuery, query.EndCountOnlyQuery, cancellationToken);
+            return TfsTaskFactory<int>.FromAsync(query.BeginCountOnlyQuery, query.EndCountOnlyQuery, cancellationToken);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace JB.Tfs.Common
         public static Task<WorkItemLinkInfo[]> RunLinkQueryAsync(this Query query, CancellationToken cancellationToken = new CancellationToken())
         {
             if (query == null) throw new ArgumentNullException("query");
-            return Nito.AsyncEx.TeamFoundationClientAsyncFactory<WorkItemLinkInfo[]>.FromApm(query.BeginLinkQuery, query.EndLinkQuery, cancellationToken);
+            return TfsTaskFactory<WorkItemLinkInfo[]>.FromAsync(query.BeginLinkQuery, query.EndLinkQuery, cancellationToken);
         }
     }
 }
