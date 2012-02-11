@@ -9,21 +9,40 @@ using Microsoft.TeamFoundation.WorkItemTracking.Client;
 
 namespace JB.Tfs.Common
 {
+    using System.Threading;
+
     /// <summary>
     /// A <see cref="T:Microsoft.TeamFoundation.WorkItemTracking.Client.WorkItemStore"/> retrieved from the <see cref="T:JB.Tfs.Common.WorkItemStoreConnectionPool"/>
     /// </summary>
-    public class PooledWorkItemStore : IDisposable
+    public sealed class PooledWorkItemStore : IPooledWorkItemStore
     {
-        private volatile bool _disposing;
-        private volatile WorkItemStore _workItemStore;
+        private WeakReference _workItemStoreReference;
+        private WeakReference _workItemStoreConnectionPoolReference;
+        private int _isDisposing;
 
         /// <summary>
         /// Gets the work item store.
         /// </summary>
         public WorkItemStore WorkItemStore
         {
-            get { return _workItemStore; }
+            get {
+                return _workItemStoreReference == null
+                           ? null
+                           : (_workItemStoreReference.IsAlive ? _workItemStoreReference.Target as WorkItemStore : null);
+            }
+        }
 
+        /// <summary>
+        /// Gets the parent work item store connection pool.
+        /// </summary>
+        public WorkItemStoreConnectionPool WorkItemStoreConnectionPool
+        {
+            get
+            {
+                return _workItemStoreConnectionPoolReference == null
+                           ? null
+                           : (_workItemStoreConnectionPoolReference.IsAlive ? _workItemStoreConnectionPoolReference.Target as WorkItemStoreConnectionPool : null);
+            }
         }
 
         /// <summary>
@@ -34,17 +53,21 @@ namespace JB.Tfs.Common
         /// </returns>
         internal bool IsDisposing()
         {
-            return _disposing;
+            return _isDisposing == 1;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PooledWorkItemStore"/> class.
         /// </summary>
+        /// <param name="workItemStoreConnectionPool">The work item store connection pool.</param>
         /// <param name="workItemStore">The work item store.</param>
-        internal PooledWorkItemStore(WorkItemStore workItemStore)
+        internal PooledWorkItemStore(WorkItemStoreConnectionPool workItemStoreConnectionPool, WorkItemStore workItemStore)
         {
+            if (workItemStoreConnectionPool == null) throw new ArgumentNullException("workItemStoreConnectionPool");
             if (workItemStore == null) throw new ArgumentNullException("workItemStore");
-            _workItemStore = workItemStore;
+
+            _workItemStoreConnectionPoolReference = new WeakReference(workItemStoreConnectionPool);
+            _workItemStoreReference = new WeakReference(workItemStore);
         }
 
         /// <summary>
@@ -64,25 +87,44 @@ namespace JB.Tfs.Common
         /// <filterpriority>2</filterpriority>
         public void Dispose()
         {
-            if (_disposing)
-                return;
-            
-            GC.SuppressFinalize(this);
-            _disposing = true;
-
-            if (_workItemStore == null)
+            if (IsDisposing())
                 return;
 
-            var released = false;
-            while (released == false)
+            Interlocked.Exchange(ref _isDisposing, 1);
+
+            try
             {
-                if (WorkItemStoreConnectionPool.Instance == null || WorkItemStoreConnectionPool.Instance.IsDisposing())
-                    break;
-                
-                released = WorkItemStoreConnectionPool.Instance.TryRelease(_workItemStore);
+                TryRelease();
             }
-            
-            _workItemStore = null;
+            finally
+            {
+                Interlocked.Exchange(ref _workItemStoreReference, null);
+                Interlocked.Exchange(ref _workItemStoreConnectionPoolReference, null);
+            }
+        }
+
+        /// <summary>
+        /// Tries to release the underlying WorkItemStore back to pool. Cannot be used safely anymore afterwards.
+        /// </summary>
+        /// <param name="retryAttempts">The retry attempts.</param>
+        /// <returns>True if successful, otherwise false.</returns>
+        public bool TryRelease(int retryAttempts = 0)
+        {
+
+            int retryAttempt = 0;
+            bool result = false;
+
+            while (result == false && retryAttempt <= retryAttempts)
+            {
+                if (WorkItemStoreConnectionPool == null || WorkItemStoreConnectionPool.IsDisposing())
+                    break;
+
+                result = WorkItemStoreConnectionPool.TryReleaseWorkItemStore(WorkItemStore, retryAttempts);
+
+                retryAttempt++;
+            }
+
+            return result;
         }
 
         #endregion

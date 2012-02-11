@@ -10,7 +10,7 @@ using System.Xml;
 
 namespace JB.Tfs.Common
 {
-    public class GlobalList
+    public class GlobalList : IGlobalList
     {
         private const string GlobalListsListItemIdentifier = "LISTITEM";
 
@@ -22,7 +22,7 @@ namespace JB.Tfs.Common
         /// <summary>
         /// Gets the values.
         /// </summary>
-        public IList<string> Values
+        public IEnumerable<string> Values
         {
             get { return _values.AsReadOnly(); }
         }
@@ -65,7 +65,7 @@ namespace JB.Tfs.Common
         /// </summary>
         /// <param name="globalListXmlElement">The global list XML element.</param>
         /// <returns></returns>
-        private IEnumerable<string> GetGlobalListItemValues(XmlElement globalListXmlElement)
+        public IEnumerable<string> GetGlobalListItemValues(XmlElement globalListXmlElement)
         {
             if (globalListXmlElement == null) throw new ArgumentNullException("globalListXmlElement");
 
