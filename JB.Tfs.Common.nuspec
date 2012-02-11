@@ -2,7 +2,7 @@
 <package>
 <metadata>
  <id>JB.Tfs.Common</id>
- <version>0.0.0.4</version>
+ <version>0.0.0.5</version>
  <title>JB.Tfs.Common - TFS Api Extensions, Wrappers and Helpers</title>
  <authors>Joerg Battermann</authors>
  <owners>Joerg Battermann</owners>
@@ -11,14 +11,12 @@
  <language>en-US</language>
  <licenseUrl>https://github.com/jbattermann/JB.Tfs.Common/blob/master/LICENSE</licenseUrl>
  <projectUrl>https://github.com/jbattermann/JB.Tfs.Common</projectUrl>
- <dependencies>
-  <dependency id="Nito.AsyncEx" />
- </dependencies>
  <tags>tfs teamfoundationserver teamfoundationservices visualstudio vs2010 net40</tags>
  <references>
   <reference file="JB.Tfs.Common.dll" />
  </references>
  <releaseNotes>
+   [0.0.0.5] Extracted appropriate interfaces. Removed Nito.AsyncEx dependency. WorkItemStore pooling works now properly.
    [0.0.0.4] Added Task/TPL based Query alternatives for all WorkItemStore.Query(..)/.QueryCount(...) methods aswell as Query(..).RunQueryAsync()/RunQueryCountAsync() &amp; .RunLinkQueryAsync() methods.
    [0.0.0.3] Fixed Refresh() Bug.
    [0.0.0.2] Moved namespace.
