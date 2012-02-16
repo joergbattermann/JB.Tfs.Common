@@ -1,11 +1,13 @@
 JB.Tfs.Common - TFS Api Extensions, Wrappers and Helpers
 
 A helper library that extends upon the Microsoft Team Foundation Server API.
-Binaries are published via and at NuGet(.org): https://nuget.org/packages/JB.Tfs.Common
+Binaries are published via NuGet(.org): https://nuget.org/packages/JB.Tfs.Common
 
 
 Acknowledgements & Thanks:
 
-- Under the hood I am currently using Stephen Cleary's Nito.AsyncEx (http://nitoasyncex.codeplex.com/)
-  library for parts of the async Queries. For license details please see:
+- Under the hood I originally used Stephen Cleary's Nito.AsyncEx (http://nitoasyncex.codeplex.com/)
+  library for parts of the async Queries. However, I've removed that dependency and replaced it with
+  an integrated set of TFS compatible .FromAsync(...) methods.
+  However for reference, license details for Nito.AsyncEx are available at:
   http://nitoasyncex.codeplex.com/license
